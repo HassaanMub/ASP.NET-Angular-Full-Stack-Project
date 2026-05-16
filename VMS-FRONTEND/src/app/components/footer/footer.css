@@ -1,0 +1,66 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: arial;
+    color: #CCC;
+}
+h2{
+    color: white;
+}
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px 40px;
+    width: 100%;
+    background: linear-gradient(-135deg, rgba(150, 0, 0, 0.1), rgba(0, 0, 0, 0.6));
+}
+
+/* Basic Styling of All Columns */
+.browseCol, .supportCol, .contactCol{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+
+    & ul{
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        gap: 8px;
+
+        & li a{
+            cursor: pointer;
+            transition: color 0.3s ease;
+            
+            &:hover{
+                color: white;
+            }
+        }
+
+        & li:not(.contactCol ul li){
+            transition: transform 0.3s ease;
+            &:hover{
+                transform: translateY(-2px);
+            }
+        }
+
+    }
+}
+
+/* Additional Styling for Last Column */
+.contactCol{
+    & li p span{
+        font-weight: bold;
+    }
+    & li:first-child p span{
+        text-decoration: underline;
+        cursor: pointer;
+        transition: color 0.2s ease;
+        &:hover{
+            color: rgb(152, 152, 252);
+        }
+    }
+}
