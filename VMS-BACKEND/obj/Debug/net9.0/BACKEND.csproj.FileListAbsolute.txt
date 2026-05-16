@@ -57,3 +57,4 @@ G:\University Material\2nd Semester\Web Technologies\Project New\VMS-BACKEND\obj
 G:\University Material\2nd Semester\Web Technologies\Project New\VMS-BACKEND\obj\Debug\net9.0\BACKEND.pdb
 G:\University Material\2nd Semester\Web Technologies\Project New\VMS-BACKEND\obj\Debug\net9.0\BACKEND.genruntimeconfig.cache
 G:\University Material\2nd Semester\Web Technologies\Project New\VMS-BACKEND\obj\Debug\net9.0\ref\BACKEND.dll
+G:\University Material\2nd Semester\Web Technologies\Project New\VMS-BACKEND\obj\Debug\net9.0\BACKEND.sourcelink.json
