@@ -14,5 +14,8 @@ namespace VMS.Models
         public string SellerName { get; set; } = "";
         public string SellerPhone { get; set; } = "";
         public string ImageUrl { get; set; } = "";
+        public string SellerLocation { get; set; } = "";
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core'; // ← Added ChangeDetectorRef
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

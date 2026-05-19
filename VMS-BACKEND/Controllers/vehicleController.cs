@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
+using System;
 using VMS.Models;
 
 namespace VMS.Controllers
@@ -34,7 +35,10 @@ namespace VMS.Controllers
                         Description = reader.GetString(8),
                         SellerName = reader.GetString(9),
                         SellerPhone = reader.GetString(10),
-                        ImageUrl = reader.GetString(11)
+                        ImageUrl = reader.GetString(11),
+                        SellerLocation = reader.GetString(12),
+                        CreatedAt = DateTime.Parse(reader.GetString(13)),
+                        UpdatedAt = DateTime.Parse(reader.GetString(14))
                     };
                     vehicles.Add(vehicle);
                 }
@@ -68,7 +72,10 @@ namespace VMS.Controllers
                         Description = reader.GetString(8),
                         SellerName = reader.GetString(9),
                         SellerPhone = reader.GetString(10),
-                        ImageUrl = reader.GetString(11)
+                        ImageUrl = reader.GetString(11),
+                        SellerLocation = reader.GetString(12),
+                        CreatedAt = DateTime.Parse(reader.GetString(13)),
+                        UpdatedAt = DateTime.Parse(reader.GetString(14))
                     };
                 }
                 connection.Close();
@@ -82,9 +89,9 @@ namespace VMS.Controllers
             {
                 connection.Open();
                 string query = @" INSERT INTO Vehicles 
-                (Brand, Model, Year, Price, Mileage, FuelType, Color, Description, SellerName, SellerPhone, ImageUrl) 
+                (Brand, Model, Year, Price, Mileage, FuelType, Color, Description, SellerName, SellerPhone, SellerLocation, ImageUrl, CreatedAt, UpdatedAt) 
                 VALUES 
-                (@Brand, @Model, @Year, @Price, @Mileage, @FuelType, @Color, @Description, @SellerName, @SellerPhone, @ImageUrl)";
+                (@Brand, @Model, @Year, @Price, @Mileage, @FuelType, @Color, @Description, @SellerName, @SellerPhone, @SellerLocation, @ImageUrl, @CreatedAt, @UpdatedAt)";
                 SqliteCommand command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@Brand", vehicle.Brand);
                 command.Parameters.AddWithValue("@Model", vehicle.Model);
@@ -96,7 +103,10 @@ namespace VMS.Controllers
                 command.Parameters.AddWithValue("@Description", vehicle.Description);
                 command.Parameters.AddWithValue("@SellerName", vehicle.SellerName);
                 command.Parameters.AddWithValue("@SellerPhone", vehicle.SellerPhone);
+                command.Parameters.AddWithValue("@SellerLocation", vehicle.SellerLocation);
                 command.Parameters.AddWithValue("@ImageUrl", vehicle.ImageUrl);
+                command.Parameters.AddWithValue("@CreatedAt", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                command.Parameters.AddWithValue("@UpdatedAt", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 command.ExecuteNonQuery();
                 connection.Close();
             }
@@ -121,7 +131,9 @@ namespace VMS.Controllers
                     Description = @Description,
                     SellerName = @SellerName,
                     SellerPhone = @SellerPhone,
-                    ImageUrl = @ImageUrl
+                    SellerLocation = @SellerLocation,
+                    ImageUrl = @ImageUrl,
+                    UpdatedAt = @UpdatedAt
                 WHERE Id = @Id";
                 SqliteCommand command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@Id", id);
@@ -135,7 +147,9 @@ namespace VMS.Controllers
                 command.Parameters.AddWithValue("@Description", vehicle.Description);
                 command.Parameters.AddWithValue("@SellerName", vehicle.SellerName);
                 command.Parameters.AddWithValue("@SellerPhone", vehicle.SellerPhone);
+                command.Parameters.AddWithValue("@SellerLocation", vehicle.SellerLocation);
                 command.Parameters.AddWithValue("@ImageUrl", vehicle.ImageUrl);
+                command.Parameters.AddWithValue("@UpdatedAt", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 command.ExecuteNonQuery();
                 connection.Close();
             }

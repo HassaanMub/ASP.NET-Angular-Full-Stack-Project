@@ -13,5 +13,9 @@ export interface Vehicle {
     description: string;
     sellerName: string;
     sellerPhone: string;
+    sellerLocation: string;
     imageUrl: string;
+
+    createdAt: Date;
+    updatedAt: Date;
 }

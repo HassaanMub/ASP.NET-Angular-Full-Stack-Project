@@ -1,1 +1,88 @@
-<p>vehicles works!</p>
+<section class="vehicles-page">
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <input type="text" placeholder="Search vehicles..." [(ngModel)]="searchText">
+        <button (click)="searchVehicles()" class="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <!-- VIEW BUTTONS -->
+    <div class="view-buttons">
+        <!-- GRID BUTTON -->
+        <button (click)="setGridView()" class="viewBtn">
+            <i class="fa-solid fa-border-all"></i>
+        </button>
+        <!-- LSIT BUTTON -->
+        <button (click)="setListView()" class="viewBtn">
+            <i class="fa-solid fa-grip-lines"></i>
+        </button>
+    </div>
+
+    <div class="filter-products">
+        <!-- FILTERS -->
+        <div class="filters">
+            <h2>Filters</h2>
+            <div class="brandInp">
+                <p>Brand</p>
+                <input type="text" class="brandInput" [(ngModel)]="brandFilter" placeholder="e.g. Toyota">
+            </div>
+            <div class="modelInp">
+                <p>Model</p>
+                <input type="text" class="modelInput" [(ngModel)]="modelFilter" placeholder="e.g. Corolla">
+            </div>
+            <div class="yearInp">
+                <p>Year Range</p>
+                <input type="number" class="yearMinRange" [(ngModel)]="minYear" placeholder="2000">
+                <input type="number" class="yearMaxRange" [(ngModel)]="maxYear" placeholder="2026">
+            </div>
+            <div class="color">
+                <p>Color</p>
+                <input type="text" class="colorInput" [(ngModel)]="colorFilter" placeholder="e.g. White">
+            </div>
+            <div class="priceInp">
+                <p>Price Range</p>
+                <input type="number" class="priceMinRange" [(ngModel)]="minPrice" placeholder="e.g. 10000">
+                <input type="number" class="priceMaxRange" [(ngModel)]="maxPrice" placeholder="e.g. 1,000,000">
+            </div>
+            <div class="fuelInp">
+                <p>Fuel Type</p>
+                <input type="text" class="fuelInput" [(ngModel)]="fuelFilter" placeholder="e.g. Petrol">
+            </div>
+            <div class="mileageInp">
+                <p>Mileage Range</p>
+                <input type="number" class="mileageMinRange" [(ngModel)]="minMileage" placeholder="100">
+                <input type="number" class="mileageMaxRange" [(ngModel)]="maxMileage" placeholder="100,000">
+            </div>
+            <button (click)="applyFilters()">Apply Filters</button>
+        </div>
+
+        <!-- VEHICLE LIST -->
+        <div class="vehicle-container" [ngClass]="viewMode">
+            <div class="vehicle-card" *ngFor="let vehicle of filteredVehicles">
+                <img [src]="vehicle.imageUrl" class="prodImg">
+                <div class="vehicle-info">
+                    <div class="price-brand-model">
+                        <h2 class="price">
+                            Rs {{ vehicle.price.toLocaleString() }}
+                        </h2>
+                
+                        <h3 class="brand">
+                            {{ vehicle.brand }}
+                        </h3>
+                
+                        <p class="model">
+                            {{ vehicle.model }}
+                        </p>
+                    </div>
+                    <div class="time-loc">
+                        <p class="location">
+                            {{ vehicle.sellerLocation }}
+                        </p>
+                        <p class="time">
+                            {{ getTimeAgo(vehicle.createdAt) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
