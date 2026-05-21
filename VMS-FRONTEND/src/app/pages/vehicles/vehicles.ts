@@ -59,6 +59,7 @@ export class Vehicles implements OnInit {
         this.vehicles = this.vehicles.filter(v => v.id !== this.selectedVehicleId);
         this.showDeletePopup = false;
         this.selectedVehicleId = null;
+        this.cdr.detectChanges();
       },
       error: (err) => { console.log(err); }
     });
@@ -68,6 +69,11 @@ export class Vehicles implements OnInit {
   openEditPopup(vehicle: Vehicle): void {
     this.editingVehicle = { ...vehicle }; // "...vehicle" creates a copy otherwise would instantly modify the card before saving
     this.showEditPopup = true;
+  }
+  // Close Edit Popup
+  closeEditPopup(): void {
+    this.showEditPopup = false;
+    this.editingVehicle = null;
   }
   // Editing Vehicle Function
   updateVehicle(): void {
@@ -81,6 +87,7 @@ export class Vehicles implements OnInit {
         this.loadVehicles();
         this.showEditPopup = false;
         this.editingVehicle = null;
+        this.cdr.detectChanges();
       },
       error: (err) => { console.log(err); }
     });

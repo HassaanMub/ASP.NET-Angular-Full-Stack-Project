@@ -167,7 +167,7 @@ namespace VMS.Controllers
                 command.ExecuteNonQuery();
                 connection.Close();
             }
-            return Ok("Vehicle Deleted Successfully");
+            return Ok(new { message = "Vehicle Deleted Successfully" });
         }
     }
 }
