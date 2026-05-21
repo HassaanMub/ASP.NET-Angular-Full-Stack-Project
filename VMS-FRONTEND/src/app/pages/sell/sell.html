@@ -1,1 +1,72 @@
-<p>sell works!</p>
+<section class="sellPage">
+    <div class="form">
+        <div class="imgDetails">
+            <h1>Vehicle Image</h1>
+            <div>
+                <h3>Image URL:</h3>
+                <input type="text" required placeholder="Enter Image URL" [(ngModel)]="vehicle.imageUrl">
+            </div>
+        </div>
+        <div class="carDetails">
+            <h1>Car Details</h1>
+            <div>
+                <h3>Brand:</h3>
+                <input type="text" required placeholder="Enter Brand" [(ngModel)]="vehicle.brand">
+            </div>
+            <div>
+                <h3>Model:</h3>
+                <input type="text" required placeholder="Enter Model" [(ngModel)]="vehicle.model">
+            </div>
+            <div>
+                <h3>Year:</h3>
+                <input type="number" class="numInp" required placeholder="Enter Model Year" [(ngModel)]="vehicle.year">
+            </div>
+            <div>
+                <h3>Color:</h3>
+                <input type="text" required placeholder="Enter Color" [(ngModel)]="vehicle.color">
+            </div>
+            <div>
+                <h3>Fuel Type:</h3>
+                <input type="text" required placeholder="Enter Fuel Type" [(ngModel)]="vehicle.fuelType">
+            </div>
+            <div>
+                <h3>Mileage:</h3>
+                <input type="number" class="numInp" required placeholder="Enter Mileage" [(ngModel)]="vehicle.mileage">
+            </div>
+            <div>
+                <h3>Price:</h3>
+                <input type="number" class="numInp" required placeholder="Enter Price" [(ngModel)]="vehicle.price">
+            </div>
+        </div>
+        <div class="sellerDetails">
+            <h1>Seller Details</h1>
+            <div>
+                <h3>Name:</h3>
+                <input type="text" required placeholder="Enter Name" [(ngModel)]="vehicle.sellerName">
+            </div>
+            <div>
+                <h3>Phone Number:</h3>
+                <input type="text" required placeholder="Enter Number" [(ngModel)]="vehicle.sellerPhone">
+            </div>
+            <div>
+                <h3>Location:</h3>
+                <input type="text" required placeholder="Enter Location" [(ngModel)]="vehicle.sellerLocation">
+            </div>
+            <div>
+                <h3>Description:</h3>
+                <textarea type="text" placeholder="Enter Description" [(ngModel)]="vehicle.description"></textarea>
+            </div>
+        </div>
+        <button (click)="addVehicle()">Add Car</button>
+    </div>
+    <!-- VALIDATION POPUP -->
+    <div class="validation-overlay" *ngIf="showPopup">
+        <div class="validation-popup">
+            <h2>{{ popupType === 'error' ? 'Form Errors' : 'Success' }}</h2>
+            <ul>
+                <li *ngFor="let msg of popupMessages">{{ msg }}</li>
+            </ul>
+            <button (click)="showPopup = false">Close</button>
+        </div>
+    </div>
+</section>

@@ -6,7 +6,7 @@
 }
 
 .vehicles-page {
-    width: 100vw;
+    width: 100%;
     height: auto;
     display: flex;
     padding: 30px 20px;
@@ -178,13 +178,104 @@
 .vehicle-container.grid .vehicle-info{
     padding: 12px;
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    justify-content: space-between;
+    position: relative;
     & .time-loc{
         display: flex;
         flex-direction: column;
-        gap: 5px;
     }
+    & .vehicle-info-subCont{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    & .menu-btn{
+        height: 35px;
+        width: 35px;
+        border-radius: 20px;
+        border: none;
+        font-size: 25px;
+        background: #DDD;
+        transition: box-shadow 0.5s ease-in-out;
+        & i{
+            font-family: "Font Awesome 6 Free", sans-serif;
+            transition: transform 1s ease-in-out;
+        }
+        &:hover{
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.25);
+            & i{
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+
+/* Edit And Delete Popup and Menu Styling */
+.menu-popup{
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    z-index: 99999;
+    position: absolute;
+    top: 45px;
+    right: 10px;
+    & button{
+        padding: 10px;
+        font-size: 17px;
+        font-weight: bolder;
+        color: white;
+    }
+}
+.editBtn{
+    border-radius: 12px 12px 0 0;
+    border: none;
+    /* border: 1px solid rgba(0, 0, 0, 0.55); */
+    border-bottom: 0 !important;
+    background: linear-gradient(45deg,
+                rgba(53, 53, 219, 0.8) 10%,            
+                rgba(102, 102, 255, 0.6) 50%,            
+                rgba(16, 16, 204, 0.8) 100%            
+    );
+    background-size: 200% 100%;
+    background-position: left center;
+    transition: background-position 0.55s ease;
+    &:hover{
+        background-position: right center;
+    }
+}
+.delBtn{
+    border-radius: 0 0 12px 12px;
+    border: none;
+    /* border: 1px solid rgba(0, 0, 0, 0.55); */
+    background: linear-gradient(45deg,
+                rgba(240, 92, 55, 0.8) 10%,            
+                rgba(192, 17, 17, 0.9) 50%,            
+                rgba(236, 52, 52, 0.8) 100%            
+    );
+    background-size: 200% 100%;
+    background-position: left center;
+    transition: background-position 0.55s ease;
+    &:hover{
+        background-position: right center;
+    }
+}
+.menu-btn{
+    position: absolute;
+    right: 10px;
+}
+.overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+.popup, .edit-popup{
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
 }
 
 /* LIST VIEW */
@@ -225,11 +316,9 @@
     background-color: white;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.15);
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
     cursor: pointer;
 }
 
@@ -248,7 +337,6 @@
 
 .vehicle-info {
     display: flex;
-    flex-direction: column;
     gap: 8px;
     .price {
         color: rgb(0, 0, 0);
@@ -266,8 +354,7 @@
     }
 }
 
-
-@media (max-width: 800px){
+@media (max-width: 840px){
     .vehicle-container.list .vehicle-card{
         flex-direction: column;
     }

@@ -11,6 +11,15 @@ import { VehicleService } from '../../services/vehicle';
   styleUrl: './vehicles.css',
 })
 export class Vehicles implements OnInit {
+  // Delete Popup
+  showDeletePopup: boolean = false;
+  selectedVehicleId: number | null = null;
+  // Edit Popup
+  showEditPopup: boolean = false;
+  editingVehicle: Vehicle | null = null;
+  // Grid Menu
+  activeMenuId: number | null = null;
+  // Vehicle Objects
   vehicles: Vehicle[] = [];
   filteredVehicles: Vehicle[] = [];
   // Search Input
@@ -28,7 +37,54 @@ export class Vehicles implements OnInit {
   maxMileage: number | null = null;
   // View Modes
   viewMode: 'grid' | 'list' = 'grid';
+
   constructor(private vehicleService: VehicleService, private cdr: ChangeDetectorRef) { }
+
+  toggleMenu(id: number): void {
+    if (this.activeMenuId === id) { this.activeMenuId = null; }
+    else { this.activeMenuId = id; }
+  }
+  openDeletePopup(id: number): void {
+    this.selectedVehicleId = id;
+    this.showDeletePopup = true;
+  }
+
+  // Delete Vehicle Function
+  deleteVehicle(): void {
+    if (this.selectedVehicleId === null) { return; }
+    this.vehicleService.deleteVehicle(this.selectedVehicleId).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.filteredVehicles = this.filteredVehicles.filter(v => v.id !== this.selectedVehicleId);
+        this.vehicles = this.vehicles.filter(v => v.id !== this.selectedVehicleId);
+        this.showDeletePopup = false;
+        this.selectedVehicleId = null;
+      },
+      error: (err) => { console.log(err); }
+    });
+  }
+
+  // Open Edit Popup
+  openEditPopup(vehicle: Vehicle): void {
+    this.editingVehicle = { ...vehicle }; // "...vehicle" creates a copy otherwise would instantly modify the card before saving
+    this.showEditPopup = true;
+  }
+  // Editing Vehicle Function
+  updateVehicle(): void {
+    if (!this.editingVehicle || !this.editingVehicle.id) { return; }
+    this.vehicleService.updateVehicle(
+      this.editingVehicle.id,
+      this.editingVehicle
+    ).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.loadVehicles();
+        this.showEditPopup = false;
+        this.editingVehicle = null;
+      },
+      error: (err) => { console.log(err); }
+    });
+  }
   ngOnInit(): void {
     this.loadVehicles();
   }
@@ -64,11 +120,11 @@ export class Vehicles implements OnInit {
   }
   setGridView(): void { this.viewMode = 'grid'; }
   setListView(): void { this.viewMode = 'list'; }
-  
+
   // Time Format
-  getTimeAgo(dateString: string | Date): string {
+  getTimeAgo(dateString: string | Date | undefined): string {
     const now = new Date();
-    const past = new Date(dateString);
+    const past = new Date(dateString!);
     const seconds = Math.floor((now.getTime() - past.getTime()) / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);

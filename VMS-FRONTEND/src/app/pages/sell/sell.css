@@ -1,0 +1,157 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+/* Main Text Styling */
+h3{ color: rgba(255, 255, 255, 0.8); }
+h1 { color: white; }
+
+/* Input & Textarea Styling */
+input{
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 8px;
+    width: 100%;
+    background: transparent;
+    color: white;
+    transition: border-bottom 0.25s ease;
+    &:focus{
+        outline: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+    }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    &[type=number] {
+        -moz-appearance: textfield;
+    }
+}
+textarea{
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    padding: 8px;
+    resize: none;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: box-shadow 0.3s ease,
+                background 0.3s ease;
+    &:focus{
+        outline: none;
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.2);
+    }
+}
+input::placeholder, textarea::placeholder {
+  color: #AAA;
+  opacity: 1;
+}
+
+/* Button Styling */
+button{
+    width: 100%;
+    max-width: 250px;
+    height: 40px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg,
+                rgba(0, 255, 100, 0.35) 25%,
+                rgba(0, 255, 125, 0.95) 50%,
+                rgba(0, 255, 100, 0.35) 100%
+    );
+    background-size: 180% 100%;
+    background-position: left center;
+    box-shadow: 8px 8px 25px rgba(150, 255, 150, 0.15);
+    transition: background-position 0.75s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+    &:hover{
+        transform: translateY(-3px) scale(1.075);
+        background-position: right center;
+        box-shadow: 8px 8px 25px rgba(150, 255, 150, 0.3);
+    }
+}
+
+.sellPage{
+    width: 100%;
+    padding: 20px;
+}
+.form{
+    width: 100%;
+    border-radius: 35px;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background: rgba(255, 255, 255, 0.15);
+}
+.imgDetails, .carDetails, .sellerDetails{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    & div{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* VALIDATION OVERLAY */
+.validation-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* POPUP */
+.validation-popup{
+    width: 90%;
+    max-width: 450px;
+    background: #1e1e1e;
+    color: white;
+    padding: 25px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* ERROR LIST */
+.validation-popup ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+}
+
+/* CLOSE BUTTON */
+.validation-popup button{
+    width: 100%;
+    max-width: 150px;
+    align-self: flex-end;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}

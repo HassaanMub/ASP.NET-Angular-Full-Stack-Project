@@ -110,7 +110,7 @@ namespace VMS.Controllers
                 command.ExecuteNonQuery();
                 connection.Close();
             }
-            return Ok("Vehicle Added Successfully");
+            return Ok(new { message = "Vehicle Added Successfully" });
         }
         [HttpPut("{id}")]
         public IActionResult UpdateVehicle(int id, Vehicle vehicle)
@@ -153,7 +153,7 @@ namespace VMS.Controllers
                 command.ExecuteNonQuery();
                 connection.Close();
             }
-            return Ok("Vehicle Updated Successfully");
+            return Ok(new { message = "Vehicle Updated Successfully" });
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteVehicle(int id)
