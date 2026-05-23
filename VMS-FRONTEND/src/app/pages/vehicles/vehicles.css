@@ -215,7 +215,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 50px;
 }
 
@@ -269,5 +269,10 @@
     .vehicle-container.list .prodImg{
         width: 100%;
         height: 220px;
+    }
+}
+@media (max-width: 610px){
+    .filter-products{
+        flex-direction: column;
     }
 }

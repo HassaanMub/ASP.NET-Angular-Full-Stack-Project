@@ -1,56 +1,151 @@
-<section class="details-page" *ngIf="vehicle">
-
-    <div class="top-section">
-
-        <div class="image-section">
+<section class="detailPage" *ngIf="vehicle">
+    
+    <div class="img-desc">
+        
+        <article class="vehicleImg">
             <img [src]="vehicle.imageUrl">
-        </div>
+        </article>
 
-        <div class="info-section">
-
-            <h1>
-                {{ vehicle.brand }} {{ vehicle.model }}
-            </h1>
-
+        <div class="name-desc">
+        
             <h2>
-                Rs {{ vehicle.price.toLocaleString() }}
+                {{ vehicle.brand }}
+                {{ vehicle.model }}
+                {{ vehicle.year }}
             </h2>
-
-            <div class="specs">
-
-                <p>Year: {{ vehicle.year }}</p>
-                <p>Fuel: {{ vehicle.fuelType }}</p>
-                <p>Mileage: {{ vehicle.mileage }}</p>
-                <p>Color: {{ vehicle.color }}</p>
-
+            <div class="carDescription">
+                <h3>Description</h3>
+                <p>{{ vehicle.description }}</p>
             </div>
+        </div>
+    </div>
 
-            <button>
-                Contact Seller
-            </button>
+    <div class="details">
+        
+        <div class="basicInfo">
+            <p>PKR {{ vehicle.price.toLocaleString() }}</p>
+        </div>
+        
+        <table class="carDetails">
+            <tbody>
+                <tr>
+                    <th>Model</th>
+                    <td>{{ vehicle.model }}</td>
+                </tr>
+                <tr>
+                    <th>Color</th>
+                    <td>{{ vehicle.color }}</td>
+                </tr>
+                <tr>
+                    <th>Fuel Type</th>
+                    <td>{{ vehicle.fuelType }}</td>
+                </tr>
+                <tr>
+                    <th>Mileage</th>
+                    <td>{{ vehicle.mileage }}</td>
+                </tr>
+                <tr>
+                    <th>Year</th>
+                    <td>{{ vehicle.year }}</td>
+                </tr>
+            </tbody>
+        </table>
 
+        <div class="sellerDetails">
+            <div class="sellername">
+                <i class="fa-solid fa-circle-user"></i>
+                <p> {{ vehicle.sellerName }} </p>
+            </div>
+            <table class="sellerContact">
+                <tbody>
+                    <tr>
+                        <th>Seller Phone</th>
+                        <td>+92{{ vehicle.sellerPhone.slice(1) }}</td>
+                    </tr>
+                    <tr>
+                        <th>Seller Location</th>
+                        <td>{{ vehicle.sellerLocation }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
+        <div class="editDelBtns">
+            <button class="editBtn" (click)="openEditPopup()">Edit</button>
+            <button class="delBtn" (click)="openDeletePopup()">Delete</button>
+        </div>
+    
     </div>
-
-    <div class="description-box">
-
-        <h2>Description</h2>
-
-        <p>
-            {{ vehicle.description }}
-        </p>
-
-    </div>
-
-    <div class="seller-box">
-
-        <h2>Seller Details</h2>
-
-        <p>{{ vehicle.sellerName }}</p>
-        <p>{{ vehicle.sellerPhone }}</p>
-        <p>{{ vehicle.sellerLocation }}</p>
-
-    </div>
-
 </section>
+
+<!-- DELETE POPUP -->
+<div class="overlay" *ngIf="showDeletePopup">
+    <div class="del-popup">
+        <h2>Delete Vehicle?</h2>
+        <p>Are you sure you want to delete this vehicle?</p>
+        <div class="popupBtns">
+            <button class="cancelBtn" (click)="closeDeletePopup()">Cancel</button>
+            <button class="confirmDelBtn" (click)="deleteVehicle()">Delete</button>
+        </div>
+    </div>
+</div>
+
+<!-- EDIT POPUP -->
+<div class="overlay" *ngIf="showEditPopup && editingVehicle">
+    <div class="edit-popup">
+        <div class="xMarkDiv"><button class="xMarkBtn" (click)="closeEditPopup()"><i class="fa-solid fa-xmark"></i></button></div>
+        <h2>Edit Vehicle</h2>
+        <div>
+            <p>Brand</p>
+            <input type="text" [(ngModel)]="editingVehicle.brand">
+        </div>
+        <div>
+            <p>Model</p>
+            <input type="text" [(ngModel)]="editingVehicle.model">
+        </div>
+        <div>
+            <p>Price</p>
+            <input type="number" [(ngModel)]="editingVehicle.price">
+        </div>
+        <div>
+            <p>Color</p>
+            <input type="text" [(ngModel)]="editingVehicle.color">
+        </div>
+        <div>
+            <p>Year</p>
+            <input type="text" [(ngModel)]="editingVehicle.year">
+        </div>
+        <div>
+            <p>Mileage</p>
+            <input type="text" [(ngModel)]="editingVehicle.mileage">
+        </div>
+        <div>
+            <p>Fuel Type</p>
+            <input type="text" [(ngModel)]="editingVehicle.fuelType">
+        </div>
+        <div>
+            <p>Image URL</p>
+            <input type="text" [(ngModel)]="editingVehicle.imageUrl">
+        </div>
+        <div>
+            <p>Description</p>
+            <textarea [(ngModel)]="editingVehicle.description"></textarea>
+        </div>
+        <div>
+            <p>Seller Name</p>
+            <input type="text" [(ngModel)]="editingVehicle.sellerName">
+        </div>
+        <div>
+            <p>Seller Phone</p>
+            <input type="text" [(ngModel)]="editingVehicle.sellerPhone">
+        </div>
+        <div>
+            <p>Seller Location</p>
+            <input type="text" [(ngModel)]="editingVehicle.sellerLocation">
+        </div>
+        <div class="popupBtns">
+            <button class="cancelBtn" (click)="closeEditPopup()"> Cancel</button>
+            <button class="saveBtn" (click)="updateVehicle()">Save</button>
+        </div>
+    </div>
+</div>
