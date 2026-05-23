@@ -1,1 +1,56 @@
-<p>product-details works!</p>
+<section class="details-page" *ngIf="vehicle">
+
+    <div class="top-section">
+
+        <div class="image-section">
+            <img [src]="vehicle.imageUrl">
+        </div>
+
+        <div class="info-section">
+
+            <h1>
+                {{ vehicle.brand }} {{ vehicle.model }}
+            </h1>
+
+            <h2>
+                Rs {{ vehicle.price.toLocaleString() }}
+            </h2>
+
+            <div class="specs">
+
+                <p>Year: {{ vehicle.year }}</p>
+                <p>Fuel: {{ vehicle.fuelType }}</p>
+                <p>Mileage: {{ vehicle.mileage }}</p>
+                <p>Color: {{ vehicle.color }}</p>
+
+            </div>
+
+            <button>
+                Contact Seller
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="description-box">
+
+        <h2>Description</h2>
+
+        <p>
+            {{ vehicle.description }}
+        </p>
+
+    </div>
+
+    <div class="seller-box">
+
+        <h2>Seller Details</h2>
+
+        <p>{{ vehicle.sellerName }}</p>
+        <p>{{ vehicle.sellerPhone }}</p>
+        <p>{{ vehicle.sellerLocation }}</p>
+
+    </div>
+
+</section>

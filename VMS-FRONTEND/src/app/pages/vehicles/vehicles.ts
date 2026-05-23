@@ -1,24 +1,17 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { Vehicle } from '../../models/vehicle';
 import { VehicleService } from '../../services/vehicle';
 
 @Component({
   selector: 'app-vehicles',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './vehicles.html',
   styleUrl: './vehicles.css',
 })
 export class Vehicles implements OnInit {
-  // Delete Popup
-  showDeletePopup: boolean = false;
-  selectedVehicleId: number | null = null;
-  // Edit Popup
-  showEditPopup: boolean = false;
-  editingVehicle: Vehicle | null = null;
-  // Grid Menu
-  activeMenuId: number | null = null;
   // Vehicle Objects
   vehicles: Vehicle[] = [];
   filteredVehicles: Vehicle[] = [];
@@ -38,60 +31,10 @@ export class Vehicles implements OnInit {
   // View Modes
   viewMode: 'grid' | 'list' = 'grid';
 
-  constructor(private vehicleService: VehicleService, private cdr: ChangeDetectorRef) { }
-
-  toggleMenu(id: number): void {
-    if (this.activeMenuId === id) { this.activeMenuId = null; }
-    else { this.activeMenuId = id; }
-  }
-  openDeletePopup(id: number): void {
-    this.selectedVehicleId = id;
-    this.showDeletePopup = true;
-  }
-
-  // Delete Vehicle Function
-  deleteVehicle(): void {
-    if (this.selectedVehicleId === null) { return; }
-    this.vehicleService.deleteVehicle(this.selectedVehicleId).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.filteredVehicles = this.filteredVehicles.filter(v => v.id !== this.selectedVehicleId);
-        this.vehicles = this.vehicles.filter(v => v.id !== this.selectedVehicleId);
-        this.showDeletePopup = false;
-        this.selectedVehicleId = null;
-        this.cdr.detectChanges();
-      },
-      error: (err) => { console.log(err); }
-    });
-  }
-
-  // Open Edit Popup
-  openEditPopup(vehicle: Vehicle): void {
-    this.editingVehicle = { ...vehicle }; // "...vehicle" creates a copy otherwise would instantly modify the card before saving
-    this.showEditPopup = true;
-  }
-  // Close Edit Popup
-  closeEditPopup(): void {
-    this.showEditPopup = false;
-    this.editingVehicle = null;
-  }
-  // Editing Vehicle Function
-  updateVehicle(): void {
-    if (!this.editingVehicle || !this.editingVehicle.id) { return; }
-    this.vehicleService.updateVehicle(
-      this.editingVehicle.id,
-      this.editingVehicle
-    ).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.loadVehicles();
-        this.showEditPopup = false;
-        this.editingVehicle = null;
-        this.cdr.detectChanges();
-      },
-      error: (err) => { console.log(err); }
-    });
-  }
+  constructor(
+    private vehicleService: VehicleService, 
+    private cdr: ChangeDetectorRef
+  ) { }
   ngOnInit(): void {
     this.loadVehicles();
   }

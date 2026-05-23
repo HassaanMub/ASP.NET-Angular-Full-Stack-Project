@@ -57,76 +57,20 @@
 
         <!-- VEHICLE LIST -->
         <div class="vehicle-container" [ngClass]="viewMode">
-            <div class="vehicle-card" *ngFor="let vehicle of filteredVehicles">
+            <div class="vehicle-card" *ngFor="let vehicle of filteredVehicles" [routerLink]="['/vehicles', vehicle.id]">
                 <img [src]="vehicle.imageUrl" class="prodImg">
                 <div class="vehicle-info">
-                    <div class="vehicle-info-subCont">
                         <div class="price-brand-model">
-                            <h2 class="price">
-                                Rs {{ vehicle.price.toLocaleString() }}
-                            </h2>
-
-                            <h3 class="brand">
-                                {{ vehicle.brand }}
-                            </h3>
-
-                            <p class="model">
-                                {{ vehicle.model }}
-                            </p>
+                            <h2 class="price">Rs {{ vehicle.price.toLocaleString() }}</h2>
+                            <h3 class="brand">{{ vehicle.brand }}</h3>
+                            <p class="model">{{ vehicle.model }}</p>
                         </div>
                         <div class="time-loc">
-                            <p class="location">
-                                {{ vehicle.sellerLocation }}
-                            </p>
-                            <p class="time">
-                                {{ getTimeAgo(vehicle.createdAt) }}
-                            </p>
+                            <p class="location">{{ vehicle.sellerLocation }}</p>
+                            <p class="time">{{ getTimeAgo(vehicle.createdAt) }}</p>
                         </div>
-                    </div>
-                    <!-- Edit & Delete Grid Btns  -->
-                    <div class="menu-container" *ngIf="viewMode === 'grid'">
-                        <button class="menu-btn" (click)="toggleMenu(vehicle.id!)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                        <div class="menu-popup" *ngIf="activeMenuId === vehicle.id">
-                            <button (click)="openEditPopup(vehicle)" class="editBtnGrid">Edit</button>
-                            <button (click)="openDeletePopup(vehicle.id!)" class="delBtnGrid">Delete</button>
-                        </div>
-                    </div>
-                    <!-- Edit & Delete List Btns -->
-                    <div class="list-actions" *ngIf="viewMode === 'list'">
-                        <button (click)="openEditPopup(vehicle)" class="editBtnList"><i class="fa-solid fa-pen"></i></button>
-                        <button (click)="openDeletePopup(vehicle.id!)" class="delBtnList"><i class="fa-solid fa-trash"></i></button>
-                    </div>
                 </div>
             </div>
         </div>
-        <!-- Delete Popup -->
-        <div class="overlay" *ngIf="showDeletePopup">
-            <div class="del-popup">
-                <h2>Delete Vehicle?</h2>
-                <p>Are you sure you want to delete this vehicle?</p>
-                <div class="popup-btns">
-                    <button (click)="showDeletePopup = false" class="cancelBtnPopup">Cancel</button>
-                    <button (click)="deleteVehicle()" class="delBtnPopup">Delete</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Edit Popup -->
-        <div class="overlay" *ngIf="showEditPopup && editingVehicle">
-            <div class="edit-popup">
-                <h2>Edit Vehicle</h2>
-                <div>
-                    <input type="text" [(ngModel)]="editingVehicle.brand">
-                    <input type="text" [(ngModel)]="editingVehicle.model">
-                    <input type="number" [(ngModel)]="editingVehicle.price">
-                    <input type="text" [(ngModel)]="editingVehicle.color">
-                </div>
-                <div class="editPopupBtns">
-                    <button (click)="closeEditPopup()" class="cancelBtnPopup">Cancel</button>
-                    <button (click)="updateVehicle()">Save Changes</button>
-                </div>
-            </div>
-        </div>
-
     </div>
 </section>
