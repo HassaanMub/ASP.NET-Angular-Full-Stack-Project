@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Vehicle } from '../models/vehicle';
 
 @Injectable({
+  // Singleton Service, One instance for entire app
   providedIn: 'root',
 })
 export class VehicleService {

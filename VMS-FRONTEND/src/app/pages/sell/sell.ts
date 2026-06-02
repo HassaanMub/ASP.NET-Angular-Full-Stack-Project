@@ -32,8 +32,6 @@ export class Sell {
   };
 
   // Validation Checks
-  // validationErrors: string[] = [];
-  // showValidationPopup: boolean = false;
   showPopup = false;
   popupType: 'error' | 'success' = 'error';
   popupMessages: string[] = [];
