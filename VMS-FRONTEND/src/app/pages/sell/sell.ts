@@ -47,7 +47,7 @@ export class Sell {
     // MODEL
     if (!this.vehicle.model.trim()) { this.popupMessages.push("Model is required."); }
     // YEAR
-    if (this.vehicle.year <= 0 && this.vehicle.year >= 1900 && this.vehicle.year <= 2030) {
+    if (this.vehicle.year <= 1900 || this.vehicle.year >= 2030) {
       this.popupMessages.push("Enter a valid year.");
     }
     // COLOR
